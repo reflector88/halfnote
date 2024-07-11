@@ -1,0 +1,18 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+   <Color x:Key="MainUIColor">WhiteSmoke</Color>
+   <Color x:Key="EditorColor">WhiteSmoke</Color>
+   <Color x:Key="PreviewerColor">White</Color>
+   <Color x:Key="BorderColor">Gray</Color>
+   <Color x:Key="SidebarColor">Gray</Color>
+   <Color x:Key="HighlightColor">Orchid</Color>
+   <Color x:Key="ContrastColor">Black</Color>
+   <Color x:Key="ListBoxHighlightColor">#737373</Color>
+   <Color x:Key="ListBoxSelectionColor">DarkGray</Color>
+   <Color x:Key="TableEvenColor">#f6f8fa</Color>
+   <Color x:Key="TableBorderColor">#d0d7de</Color>
+   <Color x:Key="TitleBarElementColor">#c4c4c4</Color>
+   <FontFamily x:Key="MonospaceFontStack">--fontStack-monospace, ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace</FontFamily>
+   <FontFamily x:Key="SystemFontStack">-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica, Arial, sans-serif</FontFamily>
+
+</ResourceDictionary>

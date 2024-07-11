@@ -1,0 +1,122 @@
+<UserControl
+   x:Class="Halfnote.Views.TitleBar"
+   xmlns="https://github.com/avaloniaui"
+   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+   xmlns:vm="using:Halfnote.ViewModels"
+   Height="35"
+   d:DesignHeight="35"
+   d:DesignWidth="400"
+   x:CompileBindings="True"
+   x:DataType="vm:MainViewModel"
+   mc:Ignorable="d">
+
+   <Design.DataContext>
+      <vm:MainViewModel />
+   </Design.DataContext>
+
+   <UserControl.Styles>
+      <Style Selector="Button">
+         <Setter Property="Background" Value="" />
+         <Setter Property="Height" Value="30" />
+      </Style>
+      <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+         <Setter Property="Background" Value="" />
+         <Setter Property="CornerRadius" Value="0" />
+      </Style>
+      <Style Selector="Button:pressed /template/ ContentPresenter#PART_ContentPresenter">
+         <Setter Property="Background" Value="" />
+         <Setter Property="CornerRadius" Value="0" />
+         <Setter Property="Height" Value="15" />
+      </Style>
+      <Style Selector="Button:disabled /template/ ContentPresenter#PART_ContentPresenter">
+         <Setter Property="Background" Value="" />
+         <Setter Property="CornerRadius" Value="0" />
+         <Setter Property="Height" Value="30" />
+      </Style>
+
+      <Style Selector="ToggleButton">
+         <Setter Property="Padding" Value="0" />
+         <Setter Property="Background" Value="{DynamicResource TitleBarElementColor}" />
+         <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}" />
+         <Setter Property="Width" Value="33" />
+      </Style>
+      <Style Selector="ToggleButton:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+         <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}" />
+         <Setter Property="Width" Value="33" />
+      </Style>
+      <Style Selector="ToggleButton:checked /template/ ContentPresenter#PART_ContentPresenter">
+         <Setter Property="Background" Value="{DynamicResource HighlightColor}" />
+         <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}" />
+      </Style>
+
+
+   </UserControl.Styles>
+
+
+   <Grid Background="{DynamicResource MainUIColor}">
+      <Grid.ColumnDefinitions>
+         <ColumnDefinition Width="0.33*" />
+         <ColumnDefinition Width="10" />
+         <ColumnDefinition Width="97" />
+         <ColumnDefinition Width="10" />
+         <ColumnDefinition Width="0.33*" />
+      </Grid.ColumnDefinitions>
+
+      <Panel Grid.Column="0">
+         <TextBox
+            Name="TextBox1"
+            Height="25"
+            BorderThickness="0"
+            IsEnabled="False"
+            LostFocus="LostFocusHandler"
+            Text="{Binding TitleBarText}" />
+
+         <Button
+            Name="TitleEditButton"
+            HorizontalAlignment="Right"
+            Click="ToggleFocus"
+            ZIndex="1">
+            <Image
+               Width="20"
+               Height="20"
+               Source="/Assets/edit_icon.png" />
+         </Button>
+
+      </Panel>
+
+      <Panel Grid.Column="2">
+         <ToggleButton
+            Name="EditorButton"
+            HorizontalAlignment="Left"
+            Click="EditorViewHandler"
+            CornerRadius="3,0,0,3"
+            HotKey="f1"
+            IsChecked="True"
+            IsDefault="True"
+            RenderTransform="None">
+            <Image Width="20" Source="/Assets/editor_icon.png" />
+         </ToggleButton>
+         <ToggleButton
+            Name="SplitButton"
+            HorizontalAlignment="Center"
+            Click="SplitViewHandler"
+            CornerRadius="0,0,0,0"
+            HotKey="f2"
+            RenderTransform="None">
+            <Image Width="20" Source="/Assets/split_icon.png" />
+         </ToggleButton>
+         <ToggleButton
+            Name="PreviewButton"
+            HorizontalAlignment="Right"
+            Click="PreviewViewHandler"
+            CornerRadius="0,3,3,0"
+            HotKey="f3"
+            RenderTransform="None">
+            <Image Width="20" Source="/Assets/markdown_icon.png" />
+         </ToggleButton>
+      </Panel>
+   </Grid>
+
+</UserControl>

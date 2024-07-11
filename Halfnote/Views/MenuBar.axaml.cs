@@ -1,0 +1,71 @@
+using Avalonia.Controls;
+using Avalonia.Interactivity;
+using DialogHostAvalonia;
+
+namespace Halfnote.Views
+{
+    public partial class MenuBar : UserControl
+    {
+        public MainWindow ParentWindow { get; set; }
+
+        public MenuBar()
+        {
+            InitializeComponent();
+        }
+
+        private void EditorViewHandler(object sender, RoutedEventArgs e)
+        {
+            ParentWindow?.EditorView();
+        }
+
+        private void SplitViewHandler(object sender, RoutedEventArgs e)
+        {
+            ParentWindow?.SplitView();
+        }
+
+        private void PreviewViewHandler(object sender, RoutedEventArgs e)
+        {
+            ParentWindow?.PreviewView();
+        }
+
+        private void SidebarViewHandler(object sender, RoutedEventArgs e)
+        {
+            ParentWindow?.SidebarView();
+        }
+
+        private void ToggleThemeHandler(object sender, RoutedEventArgs e)
+        {
+            ParentWindow?.ToggleTheme();
+        }
+
+        private async void OpenAddNotebookDialog(object? sender, RoutedEventArgs e)
+        {
+            if (ParentWindow.MainDialogHost.IsOpen)
+                return;
+
+            ParentWindow.DialogType = "Add";
+
+            await DialogHost.Show(Resources["NotebookDialog"]!, "MainDialogHost");
+        }
+
+        private async void OpenRenameNotebookDialog(object? sender, RoutedEventArgs e)
+        {
+            if (ParentWindow.MainDialogHost.IsOpen)
+                return;
+
+            ParentWindow.DialogType = "Rename";
+
+            await DialogHost.Show(Resources["NotebookDialog"]!, "MainDialogHost");
+        }
+
+        private void SetDirectory(object sender, RoutedEventArgs e)
+        {
+            ParentWindow.OpenFolderPicker();
+        }
+
+        private void ExportToMD(object sender, RoutedEventArgs e)
+        {
+            ParentWindow.SaveFilePicker();
+        }
+    }
+}

@@ -1,0 +1,77 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <AssemblyName>Halfnote</AssemblyName>
+    <RootNamespace>Halfnote</RootNamespace>
+    <ApplicationIcon>Assets\halfnote_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.0.10" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.0.10" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.10" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.10" />
+    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.10" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.10" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="DialogHost.Avalonia" Version="0.7.9" />
+    <PackageReference Include="Markdown.Avalonia" Version="11.0.2" />
+     <PackageReference Include="Avalonia.AvaloniaEdit" Version="11.0.6" />
+     <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="8.0.6" />
+     <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\MainWindow.axaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>MainWindow.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MDPreview.axaml.cs">
+      <DependentUpon>MDPreview.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TitleBar.axaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>TitleBar.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\StatusBar.axaml.cs">
+      <DependentUpon>StatusBar.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\add_icon.png" />
+    <None Remove="Assets\arrowdown_icon.png" />
+    <None Remove="Assets\arrowup_icon.png" />
+    <None Remove="Assets\editor_icon.png" />
+    <None Remove="Assets\edit_icon.png" />
+    <None Remove="Assets\markdown_icon.png" />
+    <None Remove="Assets\split_icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaXaml Update="Views\MainWindow.axaml">
+      <SubType>Designer</SubType>
+    </AvaloniaXaml>
+    <AvaloniaXaml Update="Views\TitleBar.axaml">
+      <SubType>Designer</SubType>
+    </AvaloniaXaml>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="LightTheme.axaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\halfnote_icon.ico" />
+  </ItemGroup>
+</Project>

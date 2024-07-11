@@ -1,0 +1,140 @@
+<UserControl
+   x:Class="Halfnote.Views.MDPreview"
+   xmlns="https://github.com/avaloniaui"
+   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   xmlns:ctxt="clr-namespace:ColorTextBlock.Avalonia;assembly=ColorTextBlock.Avalonia"
+   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+   xmlns:md="clr-namespace:Markdown.Avalonia;assembly=Markdown.Avalonia"
+   xmlns:vm="using:Halfnote.ViewModels"
+   d:DesignHeight="450"
+   d:DesignWidth="400"
+   x:CompileBindings="True"
+   x:DataType="vm:MainViewModel"
+   mc:Ignorable="d">
+
+   <Design.DataContext>
+      <vm:MainViewModel />
+   </Design.DataContext>
+
+   <Border
+      Margin="0,1,0,0"
+      Background="{DynamicResource PreviewerColor}"
+      BorderBrush="{DynamicResource BorderColor}"
+      BorderThickness="1"
+      CornerRadius="4">
+
+      <md:MarkdownScrollViewer
+         Name="previewer"
+         Margin="10,0,10,0"
+         IsVisible="False"
+         Markdown="{Binding PreviewText}">
+         <md:MarkdownScrollViewer.Styles>
+            <Style Selector="ctxt|CTextBlock">
+               <Setter Property="FontFamily" Value="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica, Arial, sans-serif" />
+               <Setter Property="FontSize" Value="16" />
+               <Setter Property="LineSpacing" Value="1.5" />
+               <Setter Property="Foreground" Value="{DynamicResource ContrastColor}" />
+            </Style>
+
+            <Style Selector="ctxt|CTextBlock.Heading1">
+               <Setter Property="FontSize" Value="22" />
+               <Setter Property="FontWeight" Value="Bold" />
+               <Setter Property="Foreground" Value="{DynamicResource ContrastColor}" />
+            </Style>
+            <Style Selector="ctxt|CTextBlock.Heading2">
+               <Setter Property="FontSize" Value="20" />
+               <Setter Property="FontWeight" Value="Bold" />
+               <Setter Property="Foreground" Value="{DynamicResource ContrastColor}" />
+            </Style>
+            <Style Selector="ctxt|CTextBlock.Heading3">
+               <Setter Property="FontSize" Value="18" />
+               <Setter Property="FontWeight" Value="Bold" />
+               <Setter Property="Foreground" Value="{DynamicResource ContrastColor}" />
+            </Style>
+            <Style Selector="ctxt|CTextBlock.Heading4">
+               <Setter Property="FontSize" Value="16" />
+               <Setter Property="FontWeight" Value="Bold" />
+               <Setter Property="Foreground" Value="{DynamicResource ContrastColor}" />
+            </Style>
+            <Style Selector="ctxt|CTextBlock.Heading5">
+               <Setter Property="FontSize" Value="14" />
+               <Setter Property="FontWeight" Value="Bold" />
+               <Setter Property="Foreground" Value="{DynamicResource ContrastColor}" />
+            </Style>
+            <Style Selector="ctxt|CTextBlock.Heading6">
+               <Setter Property="FontSize" Value="12" />
+               <Setter Property="FontWeight" Value="Bold" />
+               <Setter Property="Foreground" Value="{DynamicResource ContrastColor}" />
+            </Style>
+
+            <Style Selector="ctxt|CCode">
+               <Setter Property="Background" Value="WhiteSmoke" />
+               <Setter Property="FontFamily" Value="--fontStack-monospace, ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace" />
+               <Setter Property="CornerRadius" Value="4" />
+               <Setter Property="Margin" Value="3,0,3,1" />
+               <Setter Property="Padding" Value="3,1,3,-1" />
+               <Setter Property="FontSize" Value="12" />
+
+               <Setter Property="BorderBrush" Value="WhiteSmoke" />
+               <Setter Property="BorderThickness" Value="1" />
+               <Setter Property="Foreground" Value="Black" />
+            </Style>
+
+            <Style Selector=".List ctxt|CTextBlock">
+               <Setter Property="Margin" Value="-14,0,0,0" />
+               <Setter Property="Foreground" Value="{DynamicResource ContrastColor}" />
+            </Style>
+
+            <Style Selector="ctxt|CTextBlock.ListMarker">
+               <Setter Property="Margin" Value="-58,0,0,0" />
+               <Setter Property="Width" Value="14" />
+            </Style>
+
+            <Style Selector="ctxt|CHyperlink">
+               <Setter Property="IsUnderline" Value="True" />
+               <Setter Property="Foreground" Value="Blue" />
+            </Style>
+
+            <Style Selector="ctxt|CHyperlink:pointerover">
+               <Setter Property="Foreground" Value="Blue" />
+            </Style>
+
+            <Style Selector="TextBlock.CodeBlock">
+               <Setter Property="Background" Value="WhiteSmoke" />
+               <Setter Property="FontFamily" Value="--fontStack-monospace, ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace" />
+               <Setter Property="Foreground" Value="{DynamicResource ContrastColor}" />
+               <Setter Property="FontSize" Value="12" />
+            </Style>
+
+            <Style Selector="Border.CodeBlock">
+               <Setter Property="BorderBrush" Value="#f6f8fa" />
+
+            </Style>
+
+            <Style Selector="Border.Table">
+               <Setter Property="BorderBrush" Value="{DynamicResource TableBorderColor}" />
+
+            </Style>
+
+            <Style Selector="Border.TableHeader">
+               <Setter Property="BorderBrush" Value="{DynamicResource TableBorderColor}" />
+               <Setter Property="Background" Value="{DynamicResource PreviewerColor}" />
+            </Style>
+
+            <Style Selector="Border.OddTableRow">
+               <Setter Property="BorderBrush" Value="{DynamicResource TableBorderColor}" />
+            </Style>
+
+            <Style Selector="Border.EvenTableRow">
+               <Setter Property="BorderBrush" Value="{DynamicResource TableBorderColor}" />
+               <Setter Property="Background" Value="{DynamicResource TableEvenColor}" />
+            </Style>
+
+         </md:MarkdownScrollViewer.Styles>
+      </md:MarkdownScrollViewer>
+
+
+   </Border>
+
+</UserControl>

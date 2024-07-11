@@ -1,0 +1,107 @@
+<Window
+   x:Class="Halfnote.Views.MainWindow"
+   xmlns="https://github.com/avaloniaui"
+   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+   xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
+   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+   xmlns:views="clr-namespace:Halfnote.Views"
+   xmlns:vm="using:Halfnote.ViewModels"
+   Title="Halfnote"
+   Width="800"
+   Height="600"
+   d:DesignHeight="450"
+   d:DesignWidth="400"
+   x:CompileBindings="true"
+   x:DataType="vm:MainViewModel"
+   Icon="/Assets/halfnote_icon.ico"
+   KeyDown="OnKeyDown"
+   KeyUp="OnKeyUp"
+   mc:Ignorable="d">
+
+   <Design.DataContext>
+      <vm:MainViewModel />
+   </Design.DataContext>
+
+   <Window.KeyBindings>
+      <KeyBinding Command="{Binding SavePage}" Gesture="Ctrl+S" />
+      <KeyBinding Command="{Binding AddPage}" Gesture="Ctrl+N" />
+      <KeyBinding Command="{Binding DeleteNotebook}" Gesture="Ctrl+Shift+Delete" />
+   </Window.KeyBindings>
+
+   <dialogHostAvalonia:DialogHost
+      x:Name="MainDialogHost"
+      CloseOnClickAway="True"
+      DialogClosing="NotebookDialog_OnDialogClosing"
+      DisableOpeningAnimation="True"
+      Identifier="MainDialogHost"
+      OverlayBackground="Transparent">
+
+      <DockPanel Background="{DynamicResource MainUIColor}">
+
+         <Grid>
+            <Grid.RowDefinitions>
+               <RowDefinition Height="23" />
+               <RowDefinition Height="*" />
+               <RowDefinition Height="18" />
+            </Grid.RowDefinitions>
+
+            <views:MenuBar x:Name="MenuBar" VerticalAlignment="Top" />
+
+            <Grid
+               Name="MiddleWindow"
+               Grid.Row="1"
+               VerticalAlignment="Stretch">
+               <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="140" />
+                  <ColumnDefinition Width="2" />
+                  <ColumnDefinition Width="*" MinWidth="0" />
+                  <ColumnDefinition Width="2" />
+                  <ColumnDefinition Width="0" MinWidth="0" />
+               </Grid.ColumnDefinitions>
+
+
+               <views:Sidebar x:Name="Sidebar" Grid.Column="0" />
+
+               <GridSplitter
+                  Name="SidebarSplitter"
+                  Grid.Column="1"
+                  Background="{DynamicResource MainUIColor}"
+                  Opacity="0"
+                  ResizeDirection="Columns" />
+
+               <Grid Grid.Column="2">
+                  <Grid.RowDefinitions>
+                     <RowDefinition Height="30" />
+                     <RowDefinition Height="2" />
+                     <RowDefinition Height="*" />
+                  </Grid.RowDefinitions>
+
+                  <views:TitleBar x:Name="TitleBar" Grid.Row="0" />
+
+                  <Grid Name="EditorWindow" Grid.Row="2">
+                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" MinWidth="0" />
+                        <ColumnDefinition Width="0" />
+                        <ColumnDefinition Width="0" MinWidth="0" />
+                        <ColumnDefinition Width="0" />
+                     </Grid.ColumnDefinitions>
+
+                     <views:Editor Name="Editor" Grid.Column="0" />
+                     <GridSplitter
+                        Name="EditorSplitter"
+                        Grid.Column="1"
+                        IsEnabled="False"
+                        Opacity="0"
+                        ResizeDirection="Columns" />
+                     <views:MDPreview Name="MDPreview" Grid.Column="2" />
+                  </Grid>
+               </Grid>
+            </Grid>
+
+            <views:StatusBar Grid.Row="2" VerticalAlignment="Bottom" />
+         </Grid>
+
+      </DockPanel>
+   </dialogHostAvalonia:DialogHost>
+</Window>
