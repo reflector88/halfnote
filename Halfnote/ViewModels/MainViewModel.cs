@@ -401,6 +401,8 @@ public partial class MainViewModel : ViewModelBase
 
         _doNotUpdateFlag = true;
         Notebooks.RemoveAt(oldIndex);
+
+        _doNotUpdateFlag = true;
         Notebooks.Insert(newIndex, newName);
         NotebookIndex = newIndex;
     }

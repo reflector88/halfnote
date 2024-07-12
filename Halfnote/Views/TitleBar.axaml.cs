@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Halfnote.ViewModels;
 
@@ -8,6 +9,7 @@ namespace Halfnote.Views
     {
         private string _priorName;
         public MainWindow ParentWindow { get; set; }
+        private bool _renameFlag;
 
         public TitleBar()
         {
@@ -29,20 +31,28 @@ namespace Halfnote.Views
             }
         }
 
-        private void LostFocusHandler(object sender, RoutedEventArgs e)
+        private void OnKeyDown(object sender, KeyEventArgs e)
         {
-            if (_priorName != TextBox1.Text)
+            if (e.Key == Key.Enter && TextBox1.IsFocused)
             {
+                _renameFlag = true;
                 if (DataContext is MainViewModel viewModel)
                 {
                     viewModel.RenamePage();
                 }
+                ParentWindow.Editor.editor.Focus();
+            }
+        }
+
+        private void LostFocusHandler(object sender, RoutedEventArgs e)
+        {
+            if (_priorName != TextBox1.Text && !_renameFlag)
+            {
+                TextBox1.Text = _priorName;
             }
 
             TextBox1.IsEnabled = false;
-            // Deselects text
-            TextBox1.SelectionStart = TextBox1.CaretIndex;
-            TextBox1.SelectionEnd = TextBox1.CaretIndex;
+            _renameFlag = false;
         }
 
         private void EditorViewHandler(object sender, RoutedEventArgs e)

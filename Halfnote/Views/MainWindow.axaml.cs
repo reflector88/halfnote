@@ -11,7 +11,6 @@ namespace Halfnote.Views;
 
 public partial class MainWindow : Window
 {
-    private readonly MainViewModel _mainViewModel;
     public string DialogType = "Add";
     private readonly FileService _fs;
     private float _lastSidebarWidth = 140;
@@ -30,7 +29,6 @@ public partial class MainWindow : Window
 
         _fs = fileService;
         DataContext = new MainViewModel(_fs);
-        _mainViewModel = (MainViewModel)DataContext;
 
         WeakReferenceMessenger.Default.Register<ClearUndoStackMessage>(
             this,
@@ -136,15 +134,19 @@ public partial class MainWindow : Window
         if (e.Parameter == null)
             return;
 
-        switch (DialogType)
+        if (DataContext is MainViewModel viewModel)
         {
-            case "Add":
-                _mainViewModel.AddNotebook((string)e.Parameter ?? string.Empty);
-                break;
+            switch (DialogType)
+            {
+                case "Add":
+                    viewModel.AddNotebook((string)e.Parameter ?? string.Empty);
+                    break;
 
-            case "Rename":
-                _mainViewModel.RenameNotebook((string)e.Parameter ?? string.Empty);
-                break;
+                case "Rename":
+
+                    viewModel.RenameNotebook((string)e.Parameter ?? string.Empty);
+                    break;
+            }
         }
     }
 
@@ -191,7 +193,10 @@ public partial class MainWindow : Window
 
         if (file.Count >= 1)
         {
-            _mainViewModel.Import(file[0].TryGetLocalPath());
+            if (DataContext is MainViewModel viewModel)
+            {
+                viewModel.Import(file[0].TryGetLocalPath());
+            }
         }
     }
 
@@ -242,6 +247,9 @@ public partial class MainWindow : Window
 
     public void SavePage()
     {
-        _mainViewModel.SavePage();
+        if (DataContext is MainViewModel viewModel)
+        {
+            viewModel.SavePage();
+        }
     }
 }
