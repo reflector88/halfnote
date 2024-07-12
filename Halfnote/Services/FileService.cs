@@ -99,18 +99,15 @@ public class FileService : IFileService
         await File.WriteAllTextAsync(newPath, pageBody);
     }
 
+    public async Task<string> LoadFile(string filePath)
+    {
+        return await File.ReadAllTextAsync(filePath);
+    }
+
     public async Task<string> LoadFile(string notebook, string pageTitle)
     {
-        try
-        {
-            string newPath = Path.Combine(_notebooksPath, notebook, pageTitle + ".txt");
-
-            return await File.ReadAllTextAsync(newPath);
-        }
-        catch (Exception e) when (e is FileNotFoundException || e is DirectoryNotFoundException)
-        {
-            return null;
-        }
+        string newPath = Path.Combine(_notebooksPath, notebook, pageTitle + ".txt");
+        return await File.ReadAllTextAsync(newPath);
     }
 
     public void RenameFile(string notebook, string pageTitle, string newName)

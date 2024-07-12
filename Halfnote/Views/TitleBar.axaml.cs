@@ -68,5 +68,10 @@ namespace Halfnote.Views
             PreviewButton.IsChecked = true;
             ParentWindow?.PreviewView();
         }
+
+        private void TitleBarViewHandler(object sender, RoutedEventArgs e)
+        {
+            ParentWindow?.TitleBarView();
+        }
     }
 }

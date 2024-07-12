@@ -5,6 +5,7 @@ namespace Halfnote.Services;
 public interface IFileService
 {
     public AppSettings AppSettings { get; set; }
+    public Task<string> LoadFile(string filePath);
     public Task<string> LoadFile(string notebook, string pageTitle);
     public Task SaveFile(string notebook, string pageTitle, string pageBody);
     public void RenameFile(string notebook, string pageTitle, string newName);

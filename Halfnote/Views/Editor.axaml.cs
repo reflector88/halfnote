@@ -72,12 +72,12 @@ public partial class Editor : UserControl
         if (e.OffsetDelta.Y < 0 && editor.FontSize < (int)FontScale.Max && _isControlPressed)
         {
             ZoomIn();
-            _scrollViewer.Offset -= e.OffsetDelta;
+            _scrollViewer.Offset += new Avalonia.Vector(0, 50);
         }
         else if (e.OffsetDelta.Y > 0 && editor.FontSize > (int)FontScale.Min && _isControlPressed)
         {
             ZoomOut();
-            _scrollViewer.Offset -= e.OffsetDelta;
+            _scrollViewer.Offset -= new Avalonia.Vector(0, 50);
         }
     }
 
@@ -123,5 +123,10 @@ public partial class Editor : UserControl
         {
             _isControlPressed = false;
         }
+    }
+
+    private void MenuBarViewHandler(object sender, RoutedEventArgs e)
+    {
+        ParentWindow?.MenuBarView();
     }
 }

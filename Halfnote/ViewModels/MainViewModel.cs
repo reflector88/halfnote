@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Threading;
@@ -233,7 +234,6 @@ public partial class MainViewModel : ViewModelBase
     private void UpdatePreviewText(object sender, EventArgs e)
     {
         _previewTimer.Stop();
-
         PreviewText = CurrentDocument.Text;
     }
 
@@ -304,6 +304,24 @@ public partial class MainViewModel : ViewModelBase
             TitleBarText = Pages[PageIndex];
             await LoadPage();
         }
+    }
+
+    //FIXME Renaming the imported file crashes the program
+    public async Task Import(string filePath)
+    {
+        string extension = Path.GetExtension(filePath);
+
+        if (extension != ".txt" && extension != ".md")
+        {
+            DisplayMessage("Extension of type " + extension + " is not supported.");
+            return;
+        }
+
+        string fileName = Path.GetFileNameWithoutExtension(filePath);
+
+        AddPage();
+
+        CurrentDocument.Text = await _fs.LoadFile(filePath);
     }
 
     [RelayCommand]

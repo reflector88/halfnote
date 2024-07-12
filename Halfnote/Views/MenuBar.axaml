@@ -81,10 +81,8 @@
             Command="{Binding SavePage}"
             Header="Save"
             InputGesture="Ctrl+S" />
-         <MenuItem
-            Click="ExportToMD"
-            Header="Export"
-            InputGesture="Ctrl+E" />
+         <MenuItem Click="Export" Header="Export" />
+         <MenuItem Click="Import" Header="Import" />
          <MenuItem Click="SetDirectory" Header="Set Directory" />
 
       </MenuItem>

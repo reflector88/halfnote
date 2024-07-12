@@ -56,6 +56,11 @@
 
 
    <Grid Background="{DynamicResource MainUIColor}">
+      <Grid.ContextMenu>
+         <ContextMenu>
+            <MenuItem Click="TitleBarViewHandler" Header="Hide Title Bar" />
+         </ContextMenu>
+      </Grid.ContextMenu>
       <Grid.ColumnDefinitions>
          <ColumnDefinition Width="0.33*" />
          <ColumnDefinition Width="10" />

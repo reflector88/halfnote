@@ -78,9 +78,14 @@ namespace Halfnote.Views
             ParentWindow.OpenFolderPicker();
         }
 
-        private void ExportToMD(object sender, RoutedEventArgs e)
+        private void Export(object sender, RoutedEventArgs e)
         {
             ParentWindow.SaveFilePicker();
+        }
+
+        private void Import(object sender, RoutedEventArgs e)
+        {
+            ParentWindow.OpenFilePicker();
         }
     }
 }

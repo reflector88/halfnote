@@ -94,11 +94,13 @@ public partial class MainWindow : Window
         if (titleBarHeight.Value == 0)
         {
             TitleBar.IsVisible = true;
+            WorkspaceGrid.RowDefinitions[1].Height = new GridLength(2);
             WorkspaceGrid.RowDefinitions[0].Height = new GridLength(30);
         }
         else
         {
             TitleBar.IsVisible = false;
+            WorkspaceGrid.RowDefinitions[1].Height = new GridLength(0);
             WorkspaceGrid.RowDefinitions[0].Height = new GridLength(0);
         }
     }
@@ -154,7 +156,7 @@ public partial class MainWindow : Window
 
         if (folder.Count >= 1)
         {
-            string folderPath = folder[0].Path.LocalPath;
+            string folderPath = folder[0].TryGetLocalPath();
             _fs.SetRootPath(folderPath);
         }
     }
@@ -177,7 +179,19 @@ public partial class MainWindow : Window
         );
         if (file != null)
         {
-            _fs.Export(file.Path.LocalPath, Editor.editor.Document.Text);
+            _fs.Export(file.TryGetLocalPath(), Editor.editor.Document.Text);
+        }
+    }
+
+    public async void OpenFilePicker()
+    {
+        var file = await StorageProvider.OpenFilePickerAsync(
+            new FilePickerOpenOptions { AllowMultiple = false }
+        );
+
+        if (file.Count >= 1)
+        {
+            _mainViewModel.Import(file[0].TryGetLocalPath());
         }
     }
 
