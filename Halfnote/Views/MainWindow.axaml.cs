@@ -88,6 +88,47 @@ public partial class MainWindow : Window
         }
     }
 
+    public void TitleBarView()
+    {
+        var titleBarHeight = WorkspaceGrid.RowDefinitions[0].Height;
+        if (titleBarHeight.Value == 0)
+        {
+            TitleBar.IsVisible = true;
+            WorkspaceGrid.RowDefinitions[0].Height = new GridLength(30);
+        }
+        else
+        {
+            TitleBar.IsVisible = false;
+            WorkspaceGrid.RowDefinitions[0].Height = new GridLength(0);
+        }
+    }
+
+    public void MenuBarView()
+    {
+        var menuBarHeight = MainGrid.RowDefinitions[0].Height;
+        if (menuBarHeight.Value == 0)
+        {
+            MainGrid.RowDefinitions[0].Height = new GridLength(23);
+        }
+        else
+        {
+            MainGrid.RowDefinitions[0].Height = new GridLength(0);
+        }
+    }
+
+    public void StatusBarView()
+    {
+        var statusBarHeight = MainGrid.RowDefinitions[2].Height;
+        if (statusBarHeight.Value == 0)
+        {
+            MainGrid.RowDefinitions[2].Height = new GridLength(18);
+        }
+        else
+        {
+            MainGrid.RowDefinitions[2].Height = new GridLength(0);
+        }
+    }
+
     private void NotebookDialog_OnDialogClosing(object? sender, DialogClosingEventArgs e)
     {
         if (e.Parameter == null)

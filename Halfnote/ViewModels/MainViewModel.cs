@@ -65,6 +65,7 @@ public partial class MainViewModel : ViewModelBase
 
         InitializeCollections();
         InitializeTimers();
+        LoadPage();
     }
 
     private void InitializeCollections()

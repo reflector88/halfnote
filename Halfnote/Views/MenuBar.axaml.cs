@@ -33,6 +33,21 @@ namespace Halfnote.Views
             ParentWindow?.SidebarView();
         }
 
+        private void MenuBarViewHandler(object sender, RoutedEventArgs e)
+        {
+            ParentWindow?.MenuBarView();
+        }
+
+        private void TitleBarViewHandler(object sender, RoutedEventArgs e)
+        {
+            ParentWindow?.TitleBarView();
+        }
+
+        private void StatusBarViewHandler(object sender, RoutedEventArgs e)
+        {
+            ParentWindow?.StatusBarView();
+        }
+
         private void ToggleThemeHandler(object sender, RoutedEventArgs e)
         {
             ParentWindow?.ToggleTheme();

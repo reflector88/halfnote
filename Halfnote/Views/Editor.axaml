@@ -35,7 +35,13 @@
          Foreground="{DynamicResource ContrastColor}"
          PointerWheelChanged="OnPointerWheelChanged"
          ShowLineNumbers="False"
-         WordWrap="True" />
+         WordWrap="True">
+         <AvaloniaEdit:TextEditor.ContextMenu>
+            <ContextMenu>
+               <MenuItem Header="Toggle Menu" />
+            </ContextMenu>
+         </AvaloniaEdit:TextEditor.ContextMenu>
+      </AvaloniaEdit:TextEditor>
    </Border>
 
 </UserControl>

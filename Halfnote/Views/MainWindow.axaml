@@ -17,6 +17,7 @@
    Icon="/Assets/halfnote_icon.ico"
    KeyDown="OnKeyDown"
    KeyUp="OnKeyUp"
+   WindowStartupLocation="CenterScreen"
    mc:Ignorable="d">
 
    <Design.DataContext>
@@ -39,7 +40,7 @@
 
       <DockPanel Background="{DynamicResource MainUIColor}">
 
-         <Grid>
+         <Grid Name="MainGrid">
             <Grid.RowDefinitions>
                <RowDefinition Height="23" />
                <RowDefinition Height="*" />
@@ -70,7 +71,7 @@
                   Opacity="0"
                   ResizeDirection="Columns" />
 
-               <Grid Grid.Column="2">
+               <Grid Name="WorkspaceGrid" Grid.Column="2">
                   <Grid.RowDefinitions>
                      <RowDefinition Height="30" />
                      <RowDefinition Height="2" />
