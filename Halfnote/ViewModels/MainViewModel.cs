@@ -10,7 +10,6 @@ using AvaloniaEdit.Document;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using DynamicData;
 using Halfnote.Services;
 
 namespace Halfnote.ViewModels;
@@ -18,7 +17,7 @@ namespace Halfnote.ViewModels;
 //TODO Custom Shortcuts
 //dotnet publish -c Release -r win-x64 --self-contained
 
-public partial class MainViewModel : ViewModelBase
+public partial class MainViewModel : ObservableObject
 {
     private readonly IFileService _fs;
     private string _actualPageTitle = "";
@@ -71,14 +70,36 @@ public partial class MainViewModel : ViewModelBase
         LoadPage();
     }
 
+    private void CheckNotebookIntegrity()
+    {
+        var settingNotebooks = _fs.AppSettings.LastPageIndices.Keys.ToList();
+        settingNotebooks.Sort();
+
+        var programNotebooks = Notebooks.ToList();
+
+        if (!Enumerable.SequenceEqual(settingNotebooks, programNotebooks))
+        {
+            RebuildAppSettings();
+        }
+    }
+
+    private void CheckPageIntegrity(string notebookName)
+    {
+        if (_fs.AppSettings.LastPageIndices[notebookName] >= Pages.Count)
+        {
+            RebuildAppSettings();
+        }
+    }
+
     private void InitializeCollections()
     {
         int _lastNotebookIndex = _fs.AppSettings.LastNotebookIndex;
         Notebooks = new ObservableCollection<string>(_fs.GetNotebooks());
-
+        CheckNotebookIntegrity();
         _actualNotebookName = Notebooks[_lastNotebookIndex];
 
         Pages = new ObservableCollection<string>(_fs.GetPagesWithoutIndices(_actualNotebookName));
+        CheckPageIntegrity(Notebooks[_fs.AppSettings.LastNotebookIndex]);
 
         ChangePageIndex(_fs.AppSettings.LastPageIndices[Notebooks[_lastNotebookIndex]]);
         NotebookIndex = _fs.AppSettings.LastNotebookIndex;
@@ -144,11 +165,13 @@ public partial class MainViewModel : ViewModelBase
                 NotebookIndex = 0;
 
             _fs.AppSettings.LastPageIndices[Notebooks[_priorNotebookIndex]] = PageIndex;
+
             UpdatePageList();
             _actualPageTitle = PageIndex + "_" + Pages[PageIndex];
             TitleBarText = Pages[PageIndex];
             await LoadPage();
             PreviewText = CurrentDocument.Text;
+
             _fs.AppSettings.LastNotebookIndex = NotebookIndex;
             _priorNotebookIndex = NotebookIndex;
         }
@@ -187,6 +210,7 @@ public partial class MainViewModel : ViewModelBase
         }
         if (_fs.AppSettings.LastPageIndices.ContainsKey(Notebooks[NotebookIndex]))
         {
+            CheckPageIntegrity(_actualNotebookName);
             ChangePageIndex(_fs.AppSettings.LastPageIndices[Notebooks[NotebookIndex]]);
         }
         else
@@ -315,7 +339,6 @@ public partial class MainViewModel : ViewModelBase
         }
     }
 
-    //FIXME Renaming the imported file crashes the program
     public async Task Import(string filePath)
     {
         string extension = Path.GetExtension(filePath);
@@ -329,7 +352,8 @@ public partial class MainViewModel : ViewModelBase
         string fileName = Path.GetFileNameWithoutExtension(filePath);
 
         AddPage();
-
+        TitleBarText = fileName;
+        RenamePage();
         CurrentDocument.Text = await _fs.LoadFile(filePath);
     }
 

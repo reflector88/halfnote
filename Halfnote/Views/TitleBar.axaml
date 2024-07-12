@@ -59,7 +59,7 @@
    <Grid Background="{DynamicResource MainUIColor}">
       <Grid.ContextMenu>
          <ContextMenu>
-            <MenuItem Click="TitleBarViewHandler" Header="Hide Title Bar" />
+            <MenuItem Click="ToggleFocus" Header="Rename Page" />
          </ContextMenu>
       </Grid.ContextMenu>
       <Grid.ColumnDefinitions>

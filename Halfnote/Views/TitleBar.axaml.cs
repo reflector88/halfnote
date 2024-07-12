@@ -28,6 +28,7 @@ namespace Halfnote.Views
                 TextBox1.IsEnabled = true;
 
                 TextBox1.Focus();
+                TextBox1.CaretIndex = TextBox1.Text.Length;
             }
         }
 
@@ -77,11 +78,6 @@ namespace Halfnote.Views
             SplitButton.IsChecked = false;
             PreviewButton.IsChecked = true;
             ParentWindow?.PreviewView();
-        }
-
-        private void TitleBarViewHandler(object sender, RoutedEventArgs e)
-        {
-            ParentWindow?.TitleBarView();
         }
     }
 }
