@@ -10,6 +10,7 @@ using AvaloniaEdit.Document;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using DynamicData;
 using Halfnote.Services;
 
 namespace Halfnote.ViewModels;
@@ -24,6 +25,7 @@ public partial class MainViewModel : ViewModelBase
     private string _actualNotebookName = "";
     private int _priorNotebookIndex = 0;
     private bool _doNotSaveFlag = false;
+    private bool _doNotUpdateFlag = false;
     private DispatcherTimer _autosaveTimer;
     private DispatcherTimer _messageTimer;
     private DispatcherTimer _previewTimer;
@@ -132,8 +134,15 @@ public partial class MainViewModel : ViewModelBase
 
         if (e.PropertyName == nameof(NotebookIndex))
         {
+            if (_doNotUpdateFlag)
+            {
+                _doNotUpdateFlag = false;
+                return;
+            }
+
             if (NotebookIndex == -1)
                 NotebookIndex = 0;
+
             _fs.AppSettings.LastPageIndices[Notebooks[_priorNotebookIndex]] = PageIndex;
             UpdatePageList();
             _actualPageTitle = PageIndex + "_" + Pages[PageIndex];
@@ -382,9 +391,15 @@ public partial class MainViewModel : ViewModelBase
         wordList.Sort();
         int newIndex = wordList.IndexOf(newName);
 
+        _fs.AppSettings.LastPageIndices.Add(
+            newName,
+            _fs.AppSettings.LastPageIndices[_actualNotebookName]
+        );
         _fs.AppSettings.LastPageIndices.Remove(_actualNotebookName);
+
         _actualNotebookName = newName;
 
+        _doNotUpdateFlag = true;
         Notebooks.RemoveAt(oldIndex);
         Notebooks.Insert(newIndex, newName);
         NotebookIndex = newIndex;
