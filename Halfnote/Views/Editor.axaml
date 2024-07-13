@@ -31,11 +31,12 @@
          Margin="10,10,10,0"
          Background="{DynamicResource EditorColor}"
          Document="{Binding CurrentDocument}"
-         FontFamily="Cascadia Code,Consolas,Menlo,Monospace"
+         FontFamily="{Binding EditorFont}"
+         FontSize="{Binding OptionEditorFontSize}"
          Foreground="{DynamicResource ContrastColor}"
          PointerWheelChanged="OnPointerWheelChanged"
-         ShowLineNumbers="False"
-         WordWrap="True">
+         ShowLineNumbers="{Binding OptionLineNumbers}"
+         WordWrap="{Binding OptionWrap}">
          <AvaloniaEdit:TextEditor.ContextMenu>
             <ContextMenu>
                <MenuItem Click="MenuBarViewHandler" Header="Toggle Menu" />

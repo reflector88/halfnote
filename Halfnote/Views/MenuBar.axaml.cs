@@ -73,6 +73,16 @@ namespace Halfnote.Views
             await DialogHost.Show(Resources["NotebookDialog"]!, "MainDialogHost");
         }
 
+        private async void OpenPreferencesDialog(object? sender, RoutedEventArgs e)
+        {
+            if (ParentWindow.MainDialogHost.IsOpen)
+                return;
+
+            ParentWindow.DialogType = "Preferences";
+
+            await DialogHost.Show(Resources["PreferencesDialog"]!, "MainDialogHost");
+        }
+
         private void SetDirectory(object sender, RoutedEventArgs e)
         {
             ParentWindow.OpenFolderPicker();

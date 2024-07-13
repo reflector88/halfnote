@@ -54,6 +54,65 @@
                Content="Cancel"
                IsCancel="True" />
          </Panel>
+      </StackPanel>
+
+      <StackPanel
+         x:Key="PreferencesDialog"
+         x:Name="PreferencesDialogBox"
+         Width="420"
+         Margin="10,10,10,20"
+         Spacing="10">
+
+         <Label>Font Family</Label>
+         <DockPanel>
+            <TextBox Width="280" Text="{Binding OptionEditorFont}" />
+            <NumericUpDown
+               Width="110"
+               HorizontalAlignment="Right"
+               Increment="2"
+               Maximum="96"
+               Minimum="6"
+               Value="{Binding OptionEditorFontSize}" />
+         </DockPanel>
+
+
+         <CheckBox VerticalAlignment="Center" IsChecked="{Binding OptionSyntax}">Enable Syntax Highlighting</CheckBox>
+         <CheckBox VerticalAlignment="Center" IsChecked="{Binding OptionLineNumbers}">Show Line Numbers</CheckBox>
+         <CheckBox VerticalAlignment="Center" IsChecked="{Binding OptionWrap}">Word Wrap</CheckBox>
+
+         <Separator />
+
+         <DockPanel>
+            <StackPanel HorizontalAlignment="Left">
+               <Label>Autosave Interval</Label>
+
+               <DockPanel>
+                  <NumericUpDown
+                     Width="150"
+                     Increment="1"
+                     Minimum="1"
+                     Value="{Binding OptionAutosaveInterval}" />
+
+                  <Label VerticalAlignment="Center">secs</Label>
+               </DockPanel>
+
+            </StackPanel>
+
+            <StackPanel HorizontalAlignment="Center">
+               <Label>Preview Delay</Label>
+
+               <DockPanel>
+                  <NumericUpDown
+                     Width="150"
+                     Increment="0.1"
+                     Minimum="0"
+                     Value="{Binding OptionPreviewDelay}" />
+
+                  <Label VerticalAlignment="Center">secs</Label>
+               </DockPanel>
+
+            </StackPanel>
+         </DockPanel>
 
       </StackPanel>
    </UserControl.Resources>
@@ -77,13 +136,15 @@
             Header="Add Notebook..."
             InputGesture="Ctrl+M" />
          <Separator />
+
+         <MenuItem Click="Export" Header="Export to .txt or .md" />
+         <MenuItem Click="Import" Header="Import from .txt or .md" />
+         <MenuItem Click="SetDirectory" Header="Change Directory" />
+         <Separator />
          <MenuItem
             Command="{Binding SavePage}"
             Header="Save"
             InputGesture="Ctrl+S" />
-         <MenuItem Click="Export" Header="Export" />
-         <MenuItem Click="Import" Header="Import" />
-         <MenuItem Click="SetDirectory" Header="Set Directory" />
 
       </MenuItem>
 
@@ -106,6 +167,7 @@
             InputGesture="Ctrl+Shift+Delete" />
          <Separator />
          <MenuItem Command="{Binding EmptyTrash}" Header="Empty Trash" />
+         <MenuItem Click="OpenPreferencesDialog" Header="Preferences" />
       </MenuItem>
 
       <MenuItem

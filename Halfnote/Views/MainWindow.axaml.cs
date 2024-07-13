@@ -146,6 +146,8 @@ public partial class MainWindow : Window
 
                     viewModel.RenameNotebook((string)e.Parameter ?? string.Empty);
                     break;
+                default:
+                    break;
             }
         }
     }

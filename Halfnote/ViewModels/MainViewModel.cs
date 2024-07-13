@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Avalonia.Media;
 using Avalonia.Threading;
 using AvaloniaEdit.Document;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -56,6 +57,30 @@ public partial class MainViewModel : ObservableObject
 
     [ObservableProperty]
     private bool _titleBarEnabled = false;
+
+    [ObservableProperty]
+    private bool _optionSyntax = true;
+
+    [ObservableProperty]
+    private bool _optionLineNumbers = false;
+
+    [ObservableProperty]
+    private bool _optionWrap = true;
+
+    [ObservableProperty]
+    private int _optionEditorFontSize = 14;
+
+    [ObservableProperty]
+    private int _optionAutosaveInterval = 60;
+
+    [ObservableProperty]
+    private float _optionPreviewDelay = 0.5f;
+
+    [ObservableProperty]
+    private FontFamily _editorFont = new FontFamily("Cascadia Code,Consolas,Menlo,Monospace");
+
+    [ObservableProperty]
+    private string _optionEditorFont = "Cascadia Code,Consolas,Menlo,Monospace";
 
     public MainViewModel() { }
 
@@ -111,7 +136,7 @@ public partial class MainViewModel : ObservableObject
     private void InitializeTimers()
     {
         _autosaveTimer = new DispatcherTimer(
-            TimeSpan.FromMinutes(1),
+            TimeSpan.FromSeconds(OptionAutosaveInterval),
             DispatcherPriority.Background,
             DoAutoSave
         );
@@ -123,7 +148,7 @@ public partial class MainViewModel : ObservableObject
         _messageTimer.Stop();
 
         _previewTimer = new DispatcherTimer(
-            TimeSpan.FromSeconds(0.5),
+            TimeSpan.FromSeconds(OptionPreviewDelay),
             DispatcherPriority.Background,
             UpdatePreviewText
         );
@@ -132,6 +157,25 @@ public partial class MainViewModel : ObservableObject
 
     private async void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
+        if (
+            e.PropertyName == nameof(OptionAutosaveInterval)
+            || e.PropertyName == nameof(OptionPreviewDelay)
+        )
+        {
+            InitializeTimers();
+        }
+
+        if (e.PropertyName == nameof(OptionEditorFont))
+        {
+            if (OptionEditorFont.Length < 1)
+            {
+                EditorFont = "monospace";
+                return;
+            }
+
+            EditorFont = new FontFamily(OptionEditorFont);
+        }
+
         if (e.PropertyName == nameof(PageIndex))
         {
             if (!_doNotSaveFlag)
