@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -26,7 +25,6 @@ public partial class Editor : UserControl
     {
         InitializeComponent();
         editor.Loaded += Editor_Loaded;
-        EnableSyntaxHighlighting();
     }
 
     public void EnableSyntaxHighlighting()

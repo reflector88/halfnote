@@ -40,22 +40,6 @@ public partial class MainWindow : Window
                 Editor.ClearUndoStack();
             }
         );
-
-        WeakReferenceMessenger.Default.Register<EnableSyntaxMessage>(
-            this,
-            (r, m) =>
-            {
-                Editor.EnableSyntaxHighlighting();
-            }
-        );
-
-        WeakReferenceMessenger.Default.Register<DisableSyntaxMessage>(
-            this,
-            (r, m) =>
-            {
-                Editor.DisableSyntaxHighlighting();
-            }
-        );
     }
 
     public void EditorView()

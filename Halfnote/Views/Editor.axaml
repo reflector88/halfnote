@@ -36,6 +36,7 @@
          Foreground="{DynamicResource ContrastColor}"
          PointerWheelChanged="OnPointerWheelChanged"
          ShowLineNumbers="{Binding OptionLineNumbers}"
+         SyntaxHighlighting="{Binding SyntaxHighlighting}"
          WordWrap="{Binding OptionWrap}">
          <AvaloniaEdit:TextEditor.ContextMenu>
             <ContextMenu>

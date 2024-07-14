@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Avalonia.Media;
 using Avalonia.Threading;
 using AvaloniaEdit.Document;
+using AvaloniaEdit.Highlighting;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -82,6 +83,9 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty]
     private string _optionEditorFont = "Cascadia Code,Consolas,Menlo,Monospace";
 
+    [ObservableProperty]
+    private IHighlightingDefinition? _syntaxHighlighting = null;
+
     public MainViewModel() { }
 
     public MainViewModel(IFileService fileService)
@@ -98,6 +102,7 @@ public partial class MainViewModel : ObservableObject
     private void LoadAppPreferences()
     {
         OptionSyntax = _fs.AppSettings.Syntax;
+        SetHighlighting();
         OptionEditorFont = _fs.AppSettings.EditorFont;
         OptionAutosaveInterval = _fs.AppSettings.AutosaveInterval;
         OptionEditorFontSize = _fs.AppSettings.EditorFontSize;
@@ -201,20 +206,30 @@ public partial class MainViewModel : ObservableObject
 
             case nameof(OptionSyntax):
                 _fs.AppSettings.Syntax = OptionSyntax;
-                if (OptionSyntax)
-                {
-                    WeakReferenceMessenger.Default.Send(new EnableSyntaxMessage());
-                }
-                else
-                {
-                    WeakReferenceMessenger.Default.Send(new DisableSyntaxMessage());
-                }
-
+                SetHighlighting();
                 break;
 
             case nameof(OptionWrap):
                 _fs.AppSettings.Wrap = OptionWrap;
                 break;
+        }
+    }
+
+    private void SetHighlighting()
+    {
+        if (OptionSyntax)
+        {
+            var highlighting = HighlightingManager.Instance.GetDefinition("MarkDown");
+
+            highlighting.GetNamedColor("Heading").Foreground = new SimpleHighlightingBrush(
+                Colors.Orchid
+            );
+
+            SyntaxHighlighting = highlighting;
+        }
+        else
+        {
+            SyntaxHighlighting = null;
         }
     }
 
@@ -592,7 +607,3 @@ public partial class MainViewModel : ObservableObject
 }
 
 public class ClearUndoStackMessage;
-
-public class EnableSyntaxMessage;
-
-public class DisableSyntaxMessage;
