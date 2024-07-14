@@ -9,6 +9,7 @@
    <Color x:Key="ContrastColor">Black</Color>
    <Color x:Key="ListBoxHighlightColor">#737373</Color>
    <Color x:Key="ListBoxSelectionColor">DarkGray</Color>
+   <Color x:Key="MenuBarColor">WhiteSmoke</Color>
    <Color x:Key="TableEvenColor">#f6f8fa</Color>
    <Color x:Key="TableBorderColor">#d0d7de</Color>
    <Color x:Key="TitleBarElementColor">#c4c4c4</Color>

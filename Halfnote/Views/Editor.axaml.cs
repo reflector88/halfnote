@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -28,7 +29,7 @@ public partial class Editor : UserControl
         EnableSyntaxHighlighting();
     }
 
-    private void EnableSyntaxHighlighting()
+    public void EnableSyntaxHighlighting()
     {
         var highlighting = HighlightingManager.Instance.GetDefinition("MarkDown");
 
@@ -39,7 +40,7 @@ public partial class Editor : UserControl
         editor.SyntaxHighlighting = highlighting;
     }
 
-    private void DisableSyntaxHighlighting()
+    public void DisableSyntaxHighlighting()
     {
         editor.SyntaxHighlighting = null;
     }

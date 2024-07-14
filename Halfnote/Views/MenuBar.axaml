@@ -76,7 +76,9 @@
          </DockPanel>
 
 
-         <CheckBox VerticalAlignment="Center" IsChecked="{Binding OptionSyntax}">Enable Syntax Highlighting</CheckBox>
+         <CheckBox VerticalAlignment="Center" IsChecked="{Binding OptionSyntax}">
+            Enable Syntax Highlighting
+         </CheckBox>
          <CheckBox VerticalAlignment="Center" IsChecked="{Binding OptionLineNumbers}">Show Line Numbers</CheckBox>
          <CheckBox VerticalAlignment="Center" IsChecked="{Binding OptionWrap}">Word Wrap</CheckBox>
 
@@ -119,7 +121,7 @@
 
    <Menu
       Height="20"
-      Background="{DynamicResource MainUIColor}"
+      Background="{DynamicResource MenuBarColor}"
       DockPanel.Dock="Top"
       FontFamily="Segoe UI Variable">
       <MenuItem

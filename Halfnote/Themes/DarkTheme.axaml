@@ -9,6 +9,7 @@
    <Color x:Key="ContrastColor">#F6F6F6</Color>
    <Color x:Key="ListBoxHighlightColor">#181818</Color>
    <Color x:Key="ListBoxSelectionColor">#282828</Color>
+   <Color x:Key="MenuBarColor">#0F0F0F</Color>
    <Color x:Key="TableEvenColor">#161b22</Color>
    <Color x:Key="TableBorderColor">#30363d</Color>
    <Color x:Key="TitleBarElementColor">#282828</Color>

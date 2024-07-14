@@ -19,7 +19,7 @@
 
       <TextBlock
          Margin="10,1,10,0"
-         HorizontalAlignment="Right"
+         HorizontalAlignment="Left"
          FontFamily="Cascadia Code, sans-serif"
          FontSize="12"
          Foreground="DarkOrchid"

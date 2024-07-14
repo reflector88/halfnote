@@ -1,3 +1,5 @@
+using System;
+using System.ComponentModel;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -21,6 +23,7 @@ public partial class MainWindow : Window
     public MainWindow(FileService fileService)
     {
         InitializeComponent();
+
         MenuBar.ParentWindow = this;
         TitleBar.ParentWindow = this;
         Sidebar.ParentWindow = this;
@@ -35,6 +38,22 @@ public partial class MainWindow : Window
             (r, m) =>
             {
                 Editor.ClearUndoStack();
+            }
+        );
+
+        WeakReferenceMessenger.Default.Register<EnableSyntaxMessage>(
+            this,
+            (r, m) =>
+            {
+                Editor.EnableSyntaxHighlighting();
+            }
+        );
+
+        WeakReferenceMessenger.Default.Register<DisableSyntaxMessage>(
+            this,
+            (r, m) =>
+            {
+                Editor.DisableSyntaxHighlighting();
             }
         );
     }

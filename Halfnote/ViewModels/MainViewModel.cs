@@ -89,10 +89,21 @@ public partial class MainViewModel : ObservableObject
         _fs = fileService;
         PropertyChanged += OnPropertyChanged;
         CurrentDocument.TextChanged += StartPreviewTimer;
-
+        LoadAppPreferences();
         InitializeCollections();
         InitializeTimers();
         LoadPage();
+    }
+
+    private void LoadAppPreferences()
+    {
+        OptionSyntax = _fs.AppSettings.Syntax;
+        OptionEditorFont = _fs.AppSettings.EditorFont;
+        OptionAutosaveInterval = _fs.AppSettings.AutosaveInterval;
+        OptionEditorFontSize = _fs.AppSettings.EditorFontSize;
+        OptionPreviewDelay = _fs.AppSettings.PreviewDelay;
+        OptionWrap = _fs.AppSettings.Wrap;
+        OptionLineNumbers = _fs.AppSettings.LineNumbers;
     }
 
     private void CheckNotebookIntegrity()
@@ -155,26 +166,61 @@ public partial class MainViewModel : ObservableObject
         _previewTimer.Stop();
     }
 
+    private void OnAppSettingsChanged(PropertyChangedEventArgs e)
+    {
+        switch (e.PropertyName)
+        {
+            case nameof(OptionAutosaveInterval):
+                _fs.AppSettings.AutosaveInterval = OptionAutosaveInterval;
+                InitializeTimers();
+                break;
+
+            case nameof(OptionEditorFont):
+                if (OptionEditorFont.Length < 1)
+                {
+                    EditorFont = "monospace";
+                    _fs.AppSettings.EditorFont = OptionEditorFont;
+                    return;
+                }
+                EditorFont = new FontFamily(OptionEditorFont);
+                _fs.AppSettings.EditorFont = OptionEditorFont;
+                break;
+
+            case nameof(OptionEditorFontSize):
+                _fs.AppSettings.EditorFontSize = OptionEditorFontSize;
+                break;
+
+            case nameof(OptionLineNumbers):
+                _fs.AppSettings.LineNumbers = OptionLineNumbers;
+                break;
+
+            case nameof(OptionPreviewDelay):
+                _fs.AppSettings.PreviewDelay = OptionPreviewDelay;
+                InitializeTimers();
+                break;
+
+            case nameof(OptionSyntax):
+                _fs.AppSettings.Syntax = OptionSyntax;
+                if (OptionSyntax)
+                {
+                    WeakReferenceMessenger.Default.Send(new EnableSyntaxMessage());
+                }
+                else
+                {
+                    WeakReferenceMessenger.Default.Send(new DisableSyntaxMessage());
+                }
+
+                break;
+
+            case nameof(OptionWrap):
+                _fs.AppSettings.Wrap = OptionWrap;
+                break;
+        }
+    }
+
     private async void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (
-            e.PropertyName == nameof(OptionAutosaveInterval)
-            || e.PropertyName == nameof(OptionPreviewDelay)
-        )
-        {
-            InitializeTimers();
-        }
-
-        if (e.PropertyName == nameof(OptionEditorFont))
-        {
-            if (OptionEditorFont.Length < 1)
-            {
-                EditorFont = "monospace";
-                return;
-            }
-
-            EditorFont = new FontFamily(OptionEditorFont);
-        }
+        OnAppSettingsChanged(e);
 
         if (e.PropertyName == nameof(PageIndex))
         {
@@ -546,3 +592,7 @@ public partial class MainViewModel : ObservableObject
 }
 
 public class ClearUndoStackMessage;
+
+public class EnableSyntaxMessage;
+
+public class DisableSyntaxMessage;
