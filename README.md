@@ -1,6 +1,9 @@
 # Halfnote
 Halfnote is a note-taking app written in C# Avalonia.
 
+![screen1](Screenshots/screen1.png)
+![screen2](Screenshots/screen2.png)
+
 ## Features
 - Notebooks saved locally as folders
 - Markdown syntax highlighting and preview
@@ -10,4 +13,4 @@ Halfnote is a note-taking app written in C# Avalonia.
 - Cross-platform (Windows, Linux, MacOS)
 
 ## License
-GPL
+GPL-3.0
