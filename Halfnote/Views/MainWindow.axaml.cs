@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using Avalonia;
 using Avalonia.Controls;
@@ -48,6 +49,25 @@ public partial class MainWindow : Window
                 TitleBar.DoToggleFocus();
             }
         );
+
+        foreach (string UIElement in _fs.AppSettings.UILayout)
+        {
+            switch (UIElement)
+            {
+                case "Menu":
+                    MenuBarView();
+                    break;
+                case "Sidebar":
+                    SidebarView();
+                    break;
+                case "Title Bar":
+                    TitleBarView();
+                    break;
+                case "Status Bar":
+                    StatusBarView();
+                    break;
+            }
+        }
     }
 
     public void EditorView()
@@ -88,12 +108,18 @@ public partial class MainWindow : Window
         {
             MiddleWindow.ColumnDefinitions[0].Width = new GridLength(_lastSidebarWidth);
             SidebarSplitter.IsEnabled = true;
+
+            if (_fs.AppSettings.UILayout.Contains("Sidebar"))
+                _fs.AppSettings.UILayout.Remove("Sidebar");
         }
         else
         {
             _lastSidebarWidth = (float)sidebarWidth;
             MiddleWindow.ColumnDefinitions[0].Width = new GridLength(0);
             SidebarSplitter.IsEnabled = false;
+
+            if (!_fs.AppSettings.UILayout.Contains("Sidebar"))
+                _fs.AppSettings.UILayout.Add("Sidebar");
         }
     }
 
@@ -105,12 +131,18 @@ public partial class MainWindow : Window
             TitleBar.IsVisible = true;
             WorkspaceGrid.RowDefinitions[1].Height = new GridLength(2);
             WorkspaceGrid.RowDefinitions[0].Height = new GridLength(30);
+
+            if (_fs.AppSettings.UILayout.Contains("Title Bar"))
+                _fs.AppSettings.UILayout.Remove("Title Bar");
         }
         else
         {
             TitleBar.IsVisible = false;
             WorkspaceGrid.RowDefinitions[1].Height = new GridLength(0);
             WorkspaceGrid.RowDefinitions[0].Height = new GridLength(0);
+
+            if (!_fs.AppSettings.UILayout.Contains("Title Bar"))
+                _fs.AppSettings.UILayout.Add("Title Bar");
         }
     }
 
@@ -120,10 +152,16 @@ public partial class MainWindow : Window
         if (menuBarHeight.Value == 0)
         {
             MainGrid.RowDefinitions[0].Height = new GridLength(23);
+
+            if (_fs.AppSettings.UILayout.Contains("Menu"))
+                _fs.AppSettings.UILayout.Remove("Menu");
         }
         else
         {
             MainGrid.RowDefinitions[0].Height = new GridLength(0);
+
+            if (!_fs.AppSettings.UILayout.Contains("Menu"))
+                _fs.AppSettings.UILayout.Add("Menu");
         }
     }
 
@@ -133,10 +171,16 @@ public partial class MainWindow : Window
         if (statusBarHeight.Value == 0)
         {
             MainGrid.RowDefinitions[2].Height = new GridLength(18);
+
+            if (_fs.AppSettings.UILayout.Contains("Status Bar"))
+                _fs.AppSettings.UILayout.Remove("Status Bar");
         }
         else
         {
             MainGrid.RowDefinitions[2].Height = new GridLength(0);
+
+            if (!_fs.AppSettings.UILayout.Contains("Status Bar"))
+                _fs.AppSettings.UILayout.Add("Status Bar");
         }
     }
 

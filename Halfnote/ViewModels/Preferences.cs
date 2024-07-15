@@ -2,6 +2,7 @@
 using Avalonia.Media;
 using AvaloniaEdit.Highlighting;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace Halfnote.ViewModels;
 

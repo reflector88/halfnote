@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Avalonia.Controls;
 
 namespace Halfnote.Services;
 
@@ -9,14 +10,7 @@ public class AppSettings
     public string Theme { get; set; } = "Light";
     public int LastNotebookIndex { get; set; } = 0;
 
-    public Dictionary<string, bool> UILayout { get; set; } =
-        new Dictionary<string, bool>()
-        {
-            { "Menu", true },
-            { "Sidebar", true },
-            { "Titlebar", true },
-            { "Status Bar", true }
-        };
+    public List<string> UILayout { get; set; } = new List<string>() { };
 
     public Dictionary<string, int> LastPageIndices { get; set; } =
         new Dictionary<string, int>() { { "Notebook1", 0 } };
