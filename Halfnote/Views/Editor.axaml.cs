@@ -2,9 +2,7 @@ using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.Media;
 using Avalonia.VisualTree;
-using AvaloniaEdit.Highlighting;
 
 namespace Halfnote.Views;
 
@@ -25,22 +23,6 @@ public partial class Editor : UserControl
     {
         InitializeComponent();
         editor.Loaded += Editor_Loaded;
-    }
-
-    public void EnableSyntaxHighlighting()
-    {
-        var highlighting = HighlightingManager.Instance.GetDefinition("MarkDown");
-
-        highlighting.GetNamedColor("Heading").Foreground = new SimpleHighlightingBrush(
-            Colors.Orchid
-        );
-
-        editor.SyntaxHighlighting = highlighting;
-    }
-
-    public void DisableSyntaxHighlighting()
-    {
-        editor.SyntaxHighlighting = null;
     }
 
     private void Editor_Loaded(object? sender, RoutedEventArgs e)

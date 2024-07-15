@@ -93,11 +93,11 @@
 
             <Style Selector="ctxt|CHyperlink">
                <Setter Property="IsUnderline" Value="True" />
-               <Setter Property="Foreground" Value="Blue" />
+               <Setter Property="Foreground" Value="CornflowerBlue" />
             </Style>
 
             <Style Selector="ctxt|CHyperlink:pointerover">
-               <Setter Property="Foreground" Value="Blue" />
+               <Setter Property="Foreground" Value="CornflowerBlue" />
             </Style>
 
             <Style Selector="TextBlock.CodeBlock">
