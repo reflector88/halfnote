@@ -87,117 +87,111 @@
 
       </StackPanel>
    </UserControl.Resources>
-   <DockPanel Background="{DynamicResource MainUIColor}">
-      <Grid>
-         <Grid.RowDefinitions>
-            <RowDefinition Height="33" />
-            <RowDefinition Height="*" />
-
-         </Grid.RowDefinitions>
-
-         <ComboBox
-            Grid.Row="0"
-            Height="33"
-            Margin="-2,0,0,0"
-            HorizontalAlignment="Stretch"
-            Background="{DynamicResource MainUIColor}"
-            BorderThickness="0"
-            CornerRadius="0"
-            FontFamily="Segoe UI Variable"
-            FontSize="14"
-            FontWeight="Bold"
-            Foreground="{DynamicResource ContrastColor}"
-            ItemsSource="{Binding Notebooks}"
-            SelectedIndex="{Binding NotebookIndex}" />
-         <DockPanel>
-            <Menu
-               Height="33"
-               HorizontalAlignment="Right"
-               Background="{DynamicResource MainUIColor}"
-               FlowDirection="RightToLeft">
-               <MenuItem CornerRadius="4">
-                  <MenuItem.Header>
-                     <Image Width="19" Source="/Assets/hamburger_icon.png" />
-                  </MenuItem.Header>
-                  <MenuItem Click="OpenAddNotebookDialog" Header="Add" Width="138"/>
-                  <MenuItem Click="OpenRenameNotebookDialog" Header="Rename" Width="138"/>
-                  <Separator />
-                  <MenuItem Command="{Binding DeleteNotebook}" Header="Delete" Width="138"/>
-               </MenuItem>
-            </Menu>
-         </DockPanel>
 
 
-         <Border
-            Grid.Row="1"
-            Margin="-3,0,0,0"
-            BorderBrush="{DynamicResource BorderColor}"
-            BorderThickness="1"
-            CornerRadius="4">
+   <Grid Background="{DynamicResource MainUIColor}">
+      <Grid.RowDefinitions>
+         <RowDefinition Height="33" />
+         <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
 
-            <DockPanel Background="{DynamicResource SidebarColor}">
-               <Grid>
-                  <Grid.RowDefinitions>
-                     <RowDefinition Height="*" />
-                     <RowDefinition Height="33" />
-                  </Grid.RowDefinitions>
+      <ComboBox
+         Grid.Row="0"
+         Height="33"
+         Margin="-2,0,0,0"
+         HorizontalAlignment="Stretch"
+         Background="{DynamicResource MainUIColor}"
+         BorderThickness="0"
+         CornerRadius="0"
+         FontFamily="Segoe UI Variable"
+         FontSize="14"
+         FontWeight="Bold"
+         Foreground="{DynamicResource ContrastColor}"
+         ItemsSource="{Binding Notebooks}"
+         SelectedIndex="{Binding NotebookIndex}" />
 
-                  <ScrollViewer Grid.Row="0" VerticalAlignment="Top">
-                     <ListBox
-                        Background="{DynamicResource SidebarColor}"
-                        ItemsSource="{Binding Pages}"
-                        SelectedIndex="{Binding PageIndex}"
-                        SelectionMode="AlwaysSelected">
+      <Menu
+         Height="33"
+         HorizontalAlignment="Right"
+         Background="{DynamicResource MainUIColor}"
+         FlowDirection="RightToLeft">
+         <MenuItem CornerRadius="4">
+            <MenuItem.Header>
+               <Image Width="19" Source="/Assets/hamburger_icon.png" />
+            </MenuItem.Header>
+            <MenuItem
+               Width="138"
+               Click="OpenAddNotebookDialog"
+               Header="Add Book" />
+            <MenuItem
+               Width="138"
+               Click="OpenRenameNotebookDialog"
+               Header="Rename Book" />
+         </MenuItem>
+      </Menu>
 
-                        <ListBox.ContextMenu>
-                           <ContextMenu>
-                              <MenuItem Command="{Binding AddPage}" Header="Insert" />
-                              <MenuItem Command="{Binding PageUp}" Header="Move Up" />
-                              <MenuItem Command="{Binding PageDown}" Header="Move Down" />
-                              <Separator />
-                              <MenuItem Command="{Binding DeletePage}" Header="Delete" />
-                           </ContextMenu>
-                        </ListBox.ContextMenu>
-                     </ListBox>
-                  </ScrollViewer>
-
-                  <DockPanel Grid.Row="1" Background="{DynamicResource SidebarColor}">
-                     <Grid>
-                        <Grid.ColumnDefinitions>
-                           <ColumnDefinition Width="*" />
-                           <ColumnDefinition Width="*" />
-                           <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Button
-                           Grid.Column="0"
-                           HorizontalAlignment="Stretch"
-                           Command="{Binding PageDown}">
-                           <Image Width="15" Source="/Assets/arrowdown_icon.png" />
-                        </Button>
-                        <Button
-                           Grid.Column="1"
-                           HorizontalAlignment="Stretch"
-                           Command="{Binding PageUp}">
-                           <Image Width="15" Source="/Assets/arrowup_icon.png" />
-                        </Button>
-                        <Button
-                           Grid.Column="2"
-                           HorizontalAlignment="Stretch"
-                           Command="{Binding AddPage}">
-                           <Image Source="/Assets/add_icon.png" />
-
-                        </Button>
-
-                     </Grid>
-
-                  </DockPanel>
+      <Border
+         Grid.Row="1"
+         Margin="-3,0,0,0"
+         BorderBrush="{DynamicResource BorderColor}"
+         BorderThickness="1"
+         CornerRadius="4">
+         <Grid Background="{DynamicResource SidebarColor}">
+            <Grid.RowDefinitions>
+               <RowDefinition Height="*" />
+               <RowDefinition Height="33" />
+            </Grid.RowDefinitions>
 
 
-               </Grid>
-            </DockPanel>
-         </Border>
+            <ListBox
+               Grid.Row="0"
+               VerticalAlignment="Top"
+               Background="{DynamicResource SidebarColor}"
+               ItemsSource="{Binding Pages}"
+               SelectedIndex="{Binding PageIndex}"
+               SelectionMode="AlwaysSelected">
 
-      </Grid>
-   </DockPanel>
+               <ListBox.ContextMenu>
+                  <ContextMenu>
+                     <MenuItem Command="{Binding AddPage}" Header="Insert" />
+                     <MenuItem Command="{Binding PageUp}" Header="Move Up" />
+                     <MenuItem Command="{Binding PageDown}" Header="Move Down" />
+                     <Separator />
+                     <MenuItem Command="{Binding DeletePage}" Header="Delete" />
+                  </ContextMenu>
+               </ListBox.ContextMenu>
+            </ListBox>
+
+
+            <Grid Grid.Row="1">
+               <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="*" />
+                  <ColumnDefinition Width="*" />
+                  <ColumnDefinition Width="*" />
+               </Grid.ColumnDefinitions>
+
+               <Button
+                  Grid.Column="0"
+                  HorizontalAlignment="Stretch"
+                  Command="{Binding PageDown}">
+                  <Image Width="15" Source="/Assets/arrowdown_icon.png" />
+               </Button>
+               <Button
+                  Grid.Column="1"
+                  HorizontalAlignment="Stretch"
+                  Command="{Binding PageUp}">
+                  <Image Width="15" Source="/Assets/arrowup_icon.png" />
+               </Button>
+               <Button
+                  Grid.Column="2"
+                  HorizontalAlignment="Stretch"
+                  Command="{Binding AddPage}">
+                  <Image Source="/Assets/add_icon.png" />
+
+               </Button>
+            </Grid>
+         </Grid>
+      </Border>
+   </Grid>
+
 </UserControl>

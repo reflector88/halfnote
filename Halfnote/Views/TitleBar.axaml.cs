@@ -85,6 +85,9 @@ namespace Halfnote.Views
             ParentWindow?.PreviewView();
         }
 
-        private void Binding(object? sender, Avalonia.Interactivity.RoutedEventArgs e) { }
+        private void TitleBarViewHandler(object sender, RoutedEventArgs e)
+        {
+            ParentWindow?.TitleBarView();
+        }
     }
 }

@@ -60,7 +60,7 @@
    <Grid Background="{DynamicResource MainUIColor}">
       <Grid.ContextMenu>
          <ContextMenu>
-            <MenuItem Click="ToggleFocus" Header="Rename Page" />
+            <MenuItem Click="TitleBarViewHandler" Header="Hide Title Bar" />
          </ContextMenu>
       </Grid.ContextMenu>
       <Grid.ColumnDefinitions>
@@ -140,9 +140,9 @@
                <Image Width="20" Source="/Assets/trash_icon.png" />
             </MenuItem.Header>
             <MenuItem Command="{Binding DeletePage}" Header="Delete Page" />
-            <MenuItem Command="{Binding DeletePage}" Header="Delete Notebook" />
+            <MenuItem Command="{Binding DeleteNotebook}" Header="Delete Notebook" />
             <Separator />
-            <MenuItem Command="{Binding DeletePage}" Header="Empty Trash" />
+            <MenuItem Command="{Binding EmptyTrash}" Header="Empty Trash" />
          </MenuItem>
       </Menu>
    </Grid>

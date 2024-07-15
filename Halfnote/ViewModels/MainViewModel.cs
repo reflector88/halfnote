@@ -505,3 +505,5 @@ public partial class MainViewModel : ObservableObject
 public class ClearUndoStackMessage;
 
 public class AddPageMessage;
+
+public class DeletePageMessage;

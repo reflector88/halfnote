@@ -38,71 +38,69 @@
       Identifier="MainDialogHost"
       OverlayBackground="Transparent">
 
-      <DockPanel Background="{DynamicResource MainUIColor}">
+      <Grid Name="MainGrid" Background="{DynamicResource MainUIColor}">
+         <Grid.RowDefinitions>
+            <RowDefinition Height="23" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="18" />
+         </Grid.RowDefinitions>
 
-         <Grid Name="MainGrid">
-            <Grid.RowDefinitions>
-               <RowDefinition Height="23" />
-               <RowDefinition Height="*" />
-               <RowDefinition Height="18" />
-            </Grid.RowDefinitions>
+         <views:MenuBar x:Name="MenuBar" VerticalAlignment="Top" />
 
-            <views:MenuBar x:Name="MenuBar" VerticalAlignment="Top" />
-
-            <Grid
-               Name="MiddleWindow"
-               Grid.Row="1"
-               VerticalAlignment="Stretch">
-               <Grid.ColumnDefinitions>
-                  <ColumnDefinition Width="140" />
-                  <ColumnDefinition Width="2" />
-                  <ColumnDefinition Width="*" MinWidth="0" />
-                  <ColumnDefinition Width="2" />
-                  <ColumnDefinition Width="0" MinWidth="0" />
-               </Grid.ColumnDefinitions>
+         <Grid
+            Name="MiddleWindow"
+            Grid.Row="1"
+            VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+               <ColumnDefinition Width="140" />
+               <ColumnDefinition Width="2" />
+               <ColumnDefinition Width="*" MinWidth="0" />
+               <ColumnDefinition Width="2" />
+               <ColumnDefinition Width="0" MinWidth="0" />
+            </Grid.ColumnDefinitions>
 
 
-               <views:Sidebar x:Name="Sidebar" Grid.Column="0" />
+            <views:Sidebar x:Name="Sidebar" Grid.Column="0" />
 
-               <GridSplitter
-                  Name="SidebarSplitter"
-                  Grid.Column="1"
-                  Background="{DynamicResource MainUIColor}"
-                  Opacity="0"
-                  ResizeDirection="Columns" />
+            <GridSplitter
+               Name="SidebarSplitter"
+               Grid.Column="1"
+               Background="{DynamicResource MainUIColor}"
+               Opacity="0"
+               ResizeDirection="Columns" />
 
-               <Grid Name="WorkspaceGrid" Grid.Column="2">
-                  <Grid.RowDefinitions>
-                     <RowDefinition Height="30" />
-                     <RowDefinition Height="2" />
-                     <RowDefinition Height="*" />
-                  </Grid.RowDefinitions>
+            <Grid Name="WorkspaceGrid" Grid.Column="2">
+               <Grid.RowDefinitions>
+                  <RowDefinition Height="30" />
+                  <RowDefinition Height="2" />
+                  <RowDefinition Height="*" />
+               </Grid.RowDefinitions>
 
-                  <views:TitleBar x:Name="TitleBar" Grid.Row="0" />
+               <views:TitleBar x:Name="TitleBar" Grid.Row="0" />
 
-                  <Grid Name="EditorWindow" Grid.Row="2">
-                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" MinWidth="0" />
-                        <ColumnDefinition Width="0" />
-                        <ColumnDefinition Width="0" MinWidth="0" />
-                        <ColumnDefinition Width="0" />
-                     </Grid.ColumnDefinitions>
+               <Grid Name="EditorWindow" Grid.Row="2">
+                  <Grid.ColumnDefinitions>
+                     <ColumnDefinition Width="*" MinWidth="0" />
+                     <ColumnDefinition Width="0" />
+                     <ColumnDefinition Width="0" MinWidth="0" />
+                     <ColumnDefinition Width="0" />
+                  </Grid.ColumnDefinitions>
 
-                     <views:Editor Name="Editor" Grid.Column="0" />
-                     <GridSplitter
-                        Name="EditorSplitter"
-                        Grid.Column="1"
-                        IsEnabled="False"
-                        Opacity="0"
-                        ResizeDirection="Columns" />
-                     <views:MDPreview Name="MDPreview" Grid.Column="2" />
-                  </Grid>
+                  <views:Editor Name="Editor" Grid.Column="0" />
+                  <GridSplitter
+                     Name="EditorSplitter"
+                     Grid.Column="1"
+                     IsEnabled="False"
+                     Opacity="0"
+                     ResizeDirection="Columns" />
+                  <views:MDPreview Name="MDPreview" Grid.Column="2" />
                </Grid>
-            </Grid>
 
-            <views:StatusBar Grid.Row="2" VerticalAlignment="Bottom" />
+            </Grid>
          </Grid>
 
-      </DockPanel>
+         <views:StatusBar Grid.Row="2" VerticalAlignment="Bottom" />
+      </Grid>
+
    </dialogHostAvalonia:DialogHost>
 </Window>

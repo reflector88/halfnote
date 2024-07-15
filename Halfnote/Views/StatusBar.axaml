@@ -15,14 +15,14 @@
       <vm:MainViewModel />
    </Design.DataContext>
 
-   <DockPanel Background="{DynamicResource MainUIColor}">
 
-      <TextBlock
-         Margin="10,1,10,0"
-         HorizontalAlignment="Left"
-         FontFamily="Cascadia Code, sans-serif"
-         FontSize="12"
-         Foreground="DarkOrchid"
-         Text="{Binding StatusMessage}" />
-   </DockPanel>
+   <TextBlock
+      Margin="10,1,10,0"
+      HorizontalAlignment="Left"
+      Background="{DynamicResource MainUIColor}"
+      FontFamily="Cascadia Code, sans-serif"
+      FontSize="13"
+      Foreground="DarkOrchid"
+      Text="{Binding StatusMessage}" />
+
 </UserControl>
