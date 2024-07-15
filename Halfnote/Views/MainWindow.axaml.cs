@@ -40,6 +40,14 @@ public partial class MainWindow : Window
                 Editor.ClearUndoStack();
             }
         );
+
+        WeakReferenceMessenger.Default.Register<AddPageMessage>(
+            this,
+            (r, m) =>
+            {
+                TitleBar.DoToggleFocus();
+            }
+        );
     }
 
     public void EditorView()

@@ -18,6 +18,11 @@ namespace Halfnote.Views
 
         public void ToggleFocus(object? sender, RoutedEventArgs e)
         {
+            DoToggleFocus();
+        }
+
+        public void DoToggleFocus()
+        {
             if (TextBox1.IsEnabled)
             {
                 TextBox1.IsEnabled = false;

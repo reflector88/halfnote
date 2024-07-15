@@ -150,8 +150,10 @@
 
                         <ListBox.ContextMenu>
                            <ContextMenu>
+                              <MenuItem Command="{Binding AddPage}" Header="Insert" />
                               <MenuItem Command="{Binding PageUp}" Header="Move Up" />
                               <MenuItem Command="{Binding PageDown}" Header="Move Down" />
+                              <Separator />
                               <MenuItem Command="{Binding DeletePage}" Header="Delete" />
                            </ContextMenu>
                         </ListBox.ContextMenu>

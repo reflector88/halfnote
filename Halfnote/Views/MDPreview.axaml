@@ -103,11 +103,12 @@
             <Style Selector="TextBlock.CodeBlock">
                <Setter Property="Background" Value="WhiteSmoke" />
                <Setter Property="FontFamily" Value="--fontStack-monospace, ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace" />
-               <Setter Property="Foreground" Value="{DynamicResource ContrastColor}" />
+               <Setter Property="Foreground" Value="Black" />
                <Setter Property="FontSize" Value="12" />
             </Style>
 
             <Style Selector="Border.CodeBlock">
+               <Setter Property="CornerRadius" Value="2" />
                <Setter Property="BorderBrush" Value="#f6f8fa" />
 
             </Style>

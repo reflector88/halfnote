@@ -32,10 +32,6 @@ public partial class MainViewModel : ObservableObject
     private DispatcherTimer _previewTimer;
 
     public ObservableCollection<string> Notebooks { get; set; } = [];
-
-    /// <summary>
-    /// List of Page names without indices.
-    /// </summary>
     public ObservableCollection<string> Pages { get; set; } = [];
 
     [ObservableProperty]
@@ -102,13 +98,14 @@ public partial class MainViewModel : ObservableObject
     private void LoadAppPreferences()
     {
         OptionSyntax = _fs.AppSettings.Syntax;
-        SetHighlighting();
         OptionEditorFont = _fs.AppSettings.EditorFont;
         OptionAutosaveInterval = _fs.AppSettings.AutosaveInterval;
         OptionEditorFontSize = _fs.AppSettings.EditorFontSize;
         OptionPreviewDelay = _fs.AppSettings.PreviewDelay;
         OptionWrap = _fs.AppSettings.Wrap;
         OptionLineNumbers = _fs.AppSettings.LineNumbers;
+
+        SetHighlighting();
     }
 
     private void CheckNotebookIntegrity()
@@ -415,6 +412,8 @@ public partial class MainViewModel : ObservableObject
 
         SavePage();
         ChangePageIndex(newPageIndex);
+
+        WeakReferenceMessenger.Default.Send(new AddPageMessage());
     }
 
     [RelayCommand]
@@ -607,3 +606,5 @@ public partial class MainViewModel : ObservableObject
 }
 
 public class ClearUndoStackMessage;
+
+public class AddPageMessage;
