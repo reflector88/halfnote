@@ -84,5 +84,7 @@ namespace Halfnote.Views
             PreviewButton.IsChecked = true;
             ParentWindow?.PreviewView();
         }
+
+        private void Binding(object? sender, Avalonia.Interactivity.RoutedEventArgs e) { }
     }
 }

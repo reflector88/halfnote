@@ -124,6 +124,27 @@
             <Image Width="20" Source="/Assets/markdown_icon.png" />
          </ToggleButton>
       </Panel>
+
+      <Menu
+         Grid.Column="4"
+         Width="44"
+         Margin="0,0,2,0"
+         HorizontalAlignment="Right"
+         Background="Maroon"
+         CornerRadius="3"
+         FlowDirection="RightToLeft">
+
+         <MenuItem>
+
+            <MenuItem.Header>
+               <Image Width="20" Source="/Assets/trash_icon.png" />
+            </MenuItem.Header>
+            <MenuItem Command="{Binding DeletePage}" Header="Delete Page" />
+            <MenuItem Command="{Binding DeletePage}" Header="Delete Notebook" />
+            <Separator />
+            <MenuItem Command="{Binding DeletePage}" Header="Empty Trash" />
+         </MenuItem>
+      </Menu>
    </Grid>
 
 </UserControl>

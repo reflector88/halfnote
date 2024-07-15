@@ -113,15 +113,16 @@
             <Menu
                Height="33"
                HorizontalAlignment="Right"
-               Background="{DynamicResource MainUIColor}">
+               Background="{DynamicResource MainUIColor}"
+               FlowDirection="RightToLeft">
                <MenuItem CornerRadius="4">
                   <MenuItem.Header>
                      <Image Width="19" Source="/Assets/hamburger_icon.png" />
                   </MenuItem.Header>
-                  <MenuItem Click="OpenAddNotebookDialog" Header="Add Notebook" />
-                  <MenuItem Click="OpenRenameNotebookDialog" Header="Rename Notebook" />
+                  <MenuItem Click="OpenAddNotebookDialog" Header="Add" Width="138"/>
+                  <MenuItem Click="OpenRenameNotebookDialog" Header="Rename" Width="138"/>
                   <Separator />
-                  <MenuItem Command="{Binding DeleteNotebook}" Header="Delete Notebook" />
+                  <MenuItem Command="{Binding DeleteNotebook}" Header="Delete" Width="138"/>
                </MenuItem>
             </Menu>
          </DockPanel>
